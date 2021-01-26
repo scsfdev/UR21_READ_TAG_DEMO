@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UR21_READ_TAG_DEMO", "UR21_READ_TAG_DEMO\UR21_READ_TAG_DEMO.csproj", "{A8E7E241-C54B-458A-8262-F7A7BDCBEC94}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A8E7E241-C54B-458A-8262-F7A7BDCBEC94}.Debug|x64.ActiveCfg = Debug|x64
+		{A8E7E241-C54B-458A-8262-F7A7BDCBEC94}.Debug|x64.Build.0 = Debug|x64
+		{A8E7E241-C54B-458A-8262-F7A7BDCBEC94}.Release|x64.ActiveCfg = Release|x64
+		{A8E7E241-C54B-458A-8262-F7A7BDCBEC94}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

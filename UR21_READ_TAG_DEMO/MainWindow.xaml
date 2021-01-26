@@ -1,0 +1,156 @@
+﻿<Window x:Class="UR21_READ_TAG_DEMO.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ignore="http://www.galasoft.ch/ignore"
+        xmlns:myModel="clr-namespace:UR21_READ_TAG_DEMO.Model"
+        mc:Ignorable="d ignore"
+        Height="550" MinHeight="500"
+        Width="500" MinWidth="500"
+        Title="UR21 READ DEMO"
+        WindowStartupLocation="CenterScreen"
+        Icon="Resources/tags.ico"
+        DataContext="{Binding Main, Source={StaticResource Locator}}">
+    
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Skins/MainSkin.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <myModel:Bol2VisColl x:Key="B2V" Collapse="True"/>
+            <myModel:Bol2VisColl x:Key="B2VR" Collapse="True" Reverse="True"/>
+            <myModel:Bol2VisColl x:Key="B2VHidden" Collapse="False" />
+            <myModel:Obj2Enable x:Key="V2Enable" />
+            <myModel:Obj2Enable x:Key="V2EnableRev" Reverse="True" />
+            <myModel:Value2Visible x:Key="Val2Vis" bVisible="true"/>
+            <myModel:Value2Visible x:Key="Val2VisRev" bVisible="true" Reverse="True"/>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid x:Name="LayoutRoot" Background="{StaticResource MainGridBG}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="121*"/>
+            <ColumnDefinition Width="234*"/>
+            <ColumnDefinition Width="137*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!--Title-->
+        <Label Grid.Row="0" FontSize="30" Content="UR21 READ DEMO" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" 
+        		VerticalAlignment="Center" FontWeight="Bold" FontFamily="Comic Sans MS" Margin="17,-1,25,0" Grid.ColumnSpan="3" Height="52" >
+            <Label.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF5EB2EC" Offset="0.31"/>
+                    <GradientStop Color="#FFE6F7F6" Offset="0.63"/>
+                </LinearGradientBrush>
+            </Label.Foreground>
+            <Label.Effect>
+                <DropShadowEffect BlurRadius="5" RenderingBias="Quality" ShadowDepth="1" Color="#FF1092E7"/>
+            </Label.Effect>
+        </Label>
+
+        <!--Version-->
+        <Label Grid.Row="0" Grid.Column="2" Content="{Binding Version}" FontSize="10" HorizontalAlignment="Right" VerticalContentAlignment="Top" Width="36">
+            <Label.Foreground>
+                <LinearGradientBrush EndPoint="0.5,2" StartPoint="0.5,0" SpreadMethod="Reflect">
+                    <GradientStop Color="Blue"/>
+                    <GradientStop Color="Azure" Offset="0.63"/>
+                </LinearGradientBrush>
+            </Label.Foreground>
+        </Label>
+
+        
+        <!--Browse File for exporting scan tag data-->
+        <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource LblStyle}" Content="Save data to:" Height="26" Margin="0,1,0,3" Width="83" />
+        <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource CtrlLeftAlignTXT}" HorizontalAlignment="Stretch" Text="{Binding SaveLocation}" IsTabStop="False" IsReadOnly="True" />
+        <Button Grid.Row="2" Grid.Column="2" Content="Browse" HorizontalAlignment="Left" Width="50" Height="25" 
+                MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Command="{Binding CmdBrowse}" IsEnabled="{Binding IsReady}">
+            <Button.BorderBrush>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FF9737F7" Offset="0"/>
+                    <GradientStop Color="White" Offset="0.802"/>
+                </LinearGradientBrush>
+            </Button.BorderBrush>
+        </Button>
+        
+        <!--COM port-->
+        <Label Grid.Row="3" Grid.Column="0" Style="{StaticResource LblStyle}" Content="COM Port:" />
+        <TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource CtrlLeftAlignTXT}" HorizontalAlignment="Left" IsReadOnly="True" IsTabStop="False"
+                 HorizontalContentAlignment="Center" Text="{Binding ComPort}" Width="30" MaxLength="2" />
+        <!--<Button Grid.Row="3" Grid.Column="1" Content="Refresh" HorizontalAlignment="Left" Background="{x:Null}" Width="50" Height="25" BorderThickness="0" Margin="40,1,0,0" 
+                Visibility="{Binding ComPort,Converter={StaticResource Val2VisRev}}" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Command="{Binding CmdRefresh}">
+            <Button.BorderBrush>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FF9737F7" Offset="0"/>
+                    <GradientStop Color="White" Offset="0.802"/>
+                </LinearGradientBrush>
+            </Button.BorderBrush>
+        </Button>-->
+        
+        
+        <!--Antenna Selection--> <!--Currently not available-->
+        <Label Grid.Row="3" Grid.Column="1" Style="{StaticResource LblStyle}" Content="Antenna:" Visibility="Collapsed" />
+        <ComboBox Grid.Row="3" Grid.Column="2" Width="50" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Height="25" VerticalAlignment="Center" Margin="0,1,0,0"
+                  Text="{Binding Selected_Antenna}" Visibility="Collapsed">
+            <ComboBoxItem Content="1" />
+            <ComboBoxItem Content="2" />
+        </ComboBox>
+        
+        <!--Allow Duplicate-->
+        <Label Grid.Row="4" Grid.Column="0" Style="{StaticResource LblStyle}" Content="Allow duplicate:" Height="26" Margin="0,2" />
+        <CheckBox Grid.Row="4" Grid.Column="1" Content="" VerticalAlignment="Center" VerticalContentAlignment="Center" Margin="3,9,0,5" Padding="0" Height="16"
+                  IsChecked="{Binding AllowDuplicate}" IsEnabled="{Binding IsReady}" />
+        
+        <!--Action Buttons-->
+        <Button Grid.Row="3" Grid.Column="2" Content="SAVE" HorizontalAlignment="Left"  Width="50" Height="25" BorderThickness="1" FontWeight="Bold"
+                Foreground="Crimson" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" IsEnabled="{Binding EnableSave}"
+                Command="{Binding CmdSave}" Visibility="{Binding TagList.Count,Converter={StaticResource Val2Vis}}">
+            <Button.BorderBrush>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FF9737F7" Offset="0"/>
+                    <GradientStop Color="White" Offset="0.802"/>
+                </LinearGradientBrush>
+            </Button.BorderBrush>
+        </Button>
+        
+        <Button Grid.Row="6" Grid.Column="1" Content="{Binding RfCmdText}" Width="80" FontWeight="Bold" HorizontalAlignment="Left" IsEnabled="{Binding InAction}"
+                Command="{Binding CmdRfidAction}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}" Margin="3,0,0,0"/>
+        <Button Grid.Row="6" Grid.Column="1" Content="RESET" Width="80" FontWeight="Bold" HorizontalAlignment="Left" Margin="100,0,0,0"
+                Command="{Binding CmdReset}" IsEnabled="{Binding IsReady}" />
+        <Button Grid.Row="6" Grid.Column="2" Content="EXIT" Width="80" FontWeight="Bold" HorizontalAlignment="Left" Command="{Binding CmdExit}"
+                IsEnabled="{Binding IsReady}" />
+
+        <!--Data Grid-->
+        <DataGrid Grid.Row="7" Grid.ColumnSpan="3" ItemsSource="{Binding TagList}" Margin="10" Width="340"
+                  RowHeaderWidth="0" AutoGenerateColumns="False" IsEnabled="True" HorizontalAlignment="Stretch"
+                  CanUserResizeRows="False" CanUserReorderColumns="False" CanUserAddRows="False" AlternatingRowBackground="AliceBlue" 
+                  AlternationCount="2" SelectionMode="Single" SelectionUnit="FullRow" CellStyle="{StaticResource DGCStyle}" >
+            <DataGrid.Columns>
+                <DataGridTextColumn IsReadOnly="True" Header="No" MinWidth="50" Binding="{Binding No}" Width="50"
+                                    HeaderStyle="{StaticResource DGCHeaderStyle}" ElementStyle="{StaticResource DGCElementStyle}"/>
+                <DataGridTextColumn IsReadOnly="True" Header="Tag data (Hex)" MinWidth="50" Binding="{Binding Uii}" Width="200"
+                                    HeaderStyle="{StaticResource DGCHeaderStyle}" ElementStyle="{StaticResource DGCElementStyle}"/>
+                <DataGridTextColumn IsReadOnly="True" Header="Read" MinWidth="50" Binding="{Binding Qty}" Width="80"
+                                    HeaderStyle="{StaticResource DGCHeaderStyle}" ElementStyle="{StaticResource DGCElementStyle}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StatusBar Grid.Row="8" Grid.ColumnSpan="3" Height="28" Margin="2" >
+            <StatusBarItem BorderThickness="1" BorderBrush="#FFB2B2B2" HorizontalContentAlignment="Stretch">
+                <TextBlock VerticalAlignment="Stretch" Height="22" Padding="3,2" TextTrimming="CharacterEllipsis"
+                           Text="{Binding Path=StatusMsg, NotifyOnTargetUpdated=True}" TargetUpdated="TextBlock_TargetUpdated"/>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>
