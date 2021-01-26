@@ -164,8 +164,6 @@ namespace UR21_READ_TAG_DEMO.Model
             Qty = 0;
         }
 
-        //public string uii { get; set; }
-        //public int qty { get; set; }
         public int qty;
         public int Qty
         {
@@ -229,7 +227,6 @@ namespace UR21_READ_TAG_DEMO.Model
 
                 // More info on what is void* in C# >> https://stackoverflow.com/questions/15527985/what-is-void-in-c
                 IntPtr uiiBuf = Marshal.AllocHGlobal(sizeof(UiiData) * (int)iBufCount);
-                //IntPtr uiiBuf = Marshal.AllocCoTaskMem(sizeof(UiiData) * (int)iBufCount);
 
                 iReturn = UtsOpen(bPort);
                 if (iReturn != 0)
@@ -255,8 +252,6 @@ namespace UR21_READ_TAG_DEMO.Model
                             continue;
                         }
 
-                        //Console.WriteLine("Read: " + iReadCount);
-
                         for (i = 0; i < iReadCount; i++)
                         {
                             TagArgs e = new TagArgs();
@@ -277,18 +272,11 @@ namespace UR21_READ_TAG_DEMO.Model
                                 // Another example >> https://stackoverflow.com/a/27680642/770989
                                 Marshal.Copy((IntPtr)uf->uii, bUii, 0, (int)uf->length);
 
-                                // Console.WriteLine(BitConverter.ToString(br));
                                 e.Uii = BitConverter.ToString(bUii).Replace("-", "");
                             }
 
-                            //byte[] bUii = new byte[ud.length];
-                            //Marshal.Copy((IntPtr)ud.uii, bUii, 0, ud.length);
-
-                            //Console.WriteLine("  Read: " + i);
-
                             if(!OnTagRead.Equals(null))
                                 OnTagRead(this, e);
-                            // Console.WriteLine(General.HexToString(BitConverter.ToString(br).Replace("-", "")));
                         }
                     }
                     while ((iRemainCount > 0) && bTrue);
