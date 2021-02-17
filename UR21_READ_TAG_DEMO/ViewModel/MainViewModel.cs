@@ -13,6 +13,12 @@ using System.Windows.Input;
 using System.Windows.Threading;
 using UR21_READ_TAG_DEMO.Model;
 
+
+/*
+ * NOTE: Go to Project --> Projerties --> Build --> Platform target. Set it to x64. UR21 dll in this project can only work with 64 bit Windows OS.
+ */ 
+
+
 namespace UR21_READ_TAG_DEMO.ViewModel
 {
     public class MainViewModel : ViewModelBase
