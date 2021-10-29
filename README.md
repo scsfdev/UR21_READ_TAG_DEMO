@@ -1,4 +1,4 @@
-By using this source code, you fully understand above 4 points and you aware that I (main contributor) will not take any responsibility in using this project.
+By using this source code, you fully understand below 4 points and you aware that I (main contributor) will not take any responsibility in using this project.
 1. This Visual Studio Soution is developed in Visual Studio Professional 2015 Edition.
 2. The main language used is C# with MVVM Light.
 3. This project is for demo purpose only and I do not hold any responsibility for the effects/affects from using it.
@@ -6,7 +6,7 @@ By using this source code, you fully understand above 4 points and you aware tha
 
 -------------------------------------
 About this project.
-This project is to test DENSO WAVE UR21 RFID reader/writer "reading capability". 
+This project is to test DENSO WAVE UR21 RFID reader/writer "reading capability" through USB-COM interface.
 Below is the requirements.
 
 1. 64 bit PC.
